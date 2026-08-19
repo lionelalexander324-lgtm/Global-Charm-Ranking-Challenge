@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f56ab9" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <title>Global Charm Ranking Challenge</title>
+
+  <!-- 图片仍然单独放在 assets 文件夹里；CSS 和网页内容全部在这个 HTML 内。 -->
+  <link rel="preload" as="image" href="assets/hero-banner.webp?v=20260819-1525" fetchpriority="high" />
+
+  <style>
+    :root {
+      --pink: #f560b5;
+      --pink-dark: #d84291;
+      --orange: #ff9e6c;
+      --gold: #ffc857;
+      --cream: #fff3d7;
+      --cream-border: rgba(255, 190, 70, .55);
+      --text: #67244f;
+      --text-soft: #85576f;
+      --white: #fff;
+      --card: rgba(255,255,255,.88);
+      --shadow: 0 12px 34px rgba(138, 37, 99, .16);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+      background: #f67abb;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% 8%, rgba(255,255,255,.18), transparent 22%),
+        radial-gradient(circle at 90% 16%, rgba(255,255,255,.15), transparent 24%),
+        linear-gradient(180deg, #ef62c2 0%, #fb789f 52%, #ffb36f 100%);
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    a { text-decoration: none; }
+
+    .page {
+      width: min(100%, 460px);
+      margin: 0 auto;
+      padding: 14px 12px calc(28px + env(safe-area-inset-bottom));
+    }
+
+    /* 头图：保持原图比例，不拉伸、不裁切 */
+    .hero {
+      margin-bottom: 12px;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      background: rgba(255,255,255,.18);
+    }
+
+    .hero img {
+      aspect-ratio: auto;
+      object-fit: contain;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,.72);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+
+    .section-title {
+      margin: 0 0 10px;
+      font-size: 23px;
+      line-height: 1.18;
+      font-weight: 800;
+      letter-spacing: -.02em;
+      color: var(--text);
+    }
+
+    .section-text {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--text-soft);
+    }
+
+    .section-text strong { color: var(--pink-dark); }
+
+    /* Event Time：更小、左对齐，并改成暖黄色 */
+    .time-card {
+      padding: 13px 15px 14px;
+      background: linear-gradient(135deg, #fff5cd 0%, #ffe7a8 100%);
+      border-color: var(--cream-border);
+      box-shadow: 0 9px 24px rgba(178, 117, 26, .13);
+    }
+
+    .time-label {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 7px;
+      margin: 0 0 6px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .055em;
+      color: #bc6c17;
+      text-align: left;
+    }
+
+    .time-date {
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.2;
+      font-weight: 800;
+      color: #7e4d20;
+      text-align: left;
+    }
+
+    .details-card {
+      padding: 18px 15px 15px;
+    }
+
+    .details-label,
+    .rewards-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 10px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: rgba(247, 90, 174, .10);
+      color: var(--pink-dark);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .055em;
+    }
+
+    .ranking-wrap {
+      margin-top: 14px;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(237, 109, 181, .18);
+      background: #fff;
+    }
+
+    /* Rewards：一个大卡片整体包住 */
+    .rewards-card {
+      padding: 18px 15px 16px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,248,252,.92));
+      border: 1px solid rgba(255,255,255,.85);
+    }
+
+    /* 按你的要求：这句话左对齐 */
+    .rewards-intro {
+      margin: 0 0 14px;
+      text-align: left;
+      font-size: 15px;
+      line-height: 1.58;
+      color: var(--text-soft);
+    }
+
+    .reward-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .reward-item {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      align-items: center;
+      gap: 11px;
+      min-height: 78px;
+      padding: 11px 12px;
+      border-radius: 17px;
+      border: 1px solid rgba(255,255,255,.9);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.75);
+    }
+
+    .reward-item.rank1 {
+      background: linear-gradient(135deg, #fff4bf, #ffe28b);
+    }
+
+    .reward-item.rank2 {
+      background: linear-gradient(135deg, #f6f5ff, #e9e9f7);
+    }
+
+    .reward-item.rank3 {
+      background: linear-gradient(135deg, #ffe9da, #ffd2b6);
+    }
+
+    .medal {
+      width: 48px;
+      height: 48px;
+      border-radius: 15px;
+      display: grid;
+      place-items: center;
+      font-size: 25px;
+      background: rgba(255,255,255,.72);
+    }
+
+    .reward-name {
+      margin: 0 0 3px;
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .reward-value {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.4;
+      color: var(--text-soft);
+    }
+
+    .reward-value strong {
+      color: var(--pink-dark);
+      font-size: 16px;
+    }
+
+    .footer-card {
+      padding: 20px 15px;
+      text-align: center;
+      background: rgba(255,255,255,.84);
+    }
+
+    .footer-title {
+      margin: 0 0 12px;
+      font-size: 22px;
+      font-weight: 800;
+      line-height: 1.25;
+      color: var(--text);
+    }
+
+    .question {
+      margin: 0 0 10px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-soft);
+    }
+
+    .wa-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 50px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: #25d366;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 800;
+      box-shadow: 0 10px 24px rgba(37, 211, 102, .26);
+    }
+
+    @media (max-width: 360px) {
+      .page { padding-left: 10px; padding-right: 10px; }
+      .section-title { font-size: 21px; }
+      .time-date { font-size: 18px; }
+      .reward-item { grid-template-columns: 44px 1fr; }
+      .medal { width: 44px; height: 44px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+
+    <!-- 1. 头图 -->
+    <section class="hero" aria-label="Global Charm Ranking Challenge banner">
+      <img
+        src="assets/hero-banner.webp?v=20260819-1525"
+        alt="Global Charm Ranking Challenge"
+        width="1600"
+        height="533"
+        fetchpriority="high"
+        decoding="async"
+      />
+    </section>
+
+    <!-- 2. Event Time：更小、左对齐、暖黄色 -->
+    <section class="card time-card">
+      <div class="time-label">🗓️ EVENT TIME</div>
+      <p class="time-date">August 20 – August 23</p>
+    </section>
+
+    <!-- 3. Event Details -->
+    <section class="card details-card">
+      <div class="details-label">🏆 EVENT DETAILS</div>
+      <h2 class="section-title">Daily Global Charm Ranking</h2>
+      <p class="section-text">
+        During the event, rankings will be counted based on the
+        <strong>daily Global Charm Ranking</strong>.
+      </p>
+
+      <div class="ranking-wrap">
+        <img
+          src="assets/ranking.webp?v=20260819-1525"
+          alt="Daily Global Charm Ranking screenshot"
+          width="845"
+          height="606"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </section>
+
+    <!-- 4. Rewards：一个大卡片框住全部奖励 -->
+    <section class="card rewards-card">
+      <div class="rewards-label">🎁 REWARDS</div>
+      <h2 class="section-title">Top 3 Rewards</h2>
+
+      <p class="rewards-intro">
+        The top 3 users on the ranking will receive extra rewards:
+      </p>
+
+      <div class="reward-list">
+        <div class="reward-item rank1">
+          <div class="medal">🥇</div>
+          <div>
+            <p class="reward-name">Rank 1</p>
+            <p class="reward-value">Reward: <strong>200,000 Coins</strong></p>
+          </div>
+        </div>
+
+        <div class="reward-item rank2">
+          <div class="medal">🥈</div>
+          <div>
+            <p class="reward-name">Rank 2</p>
+            <p class="reward-value">Reward: <strong>150,000 Coins</strong></p>
+          </div>
+        </div>
+
+        <div class="reward-item rank3">
+          <div class="medal">🥉</div>
+          <div>
+            <p class="reward-name">Rank 3</p>
+            <p class="reward-value">Reward: <strong>100,000 Coins</strong></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. 底部 -->
+    <section class="card footer-card">
+      <h2 class="footer-title">Rise in Charm, Win Big Rewards!</h2>
+      <p class="question">Questions?</p>
+      <a
+        class="wa-button"
+        href="https://wa.me/8618646390081"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        WhatsApp: +86 186 4639 0081
+      </a>
+    </section>
+
+  </main>
+</body>
+</html>
